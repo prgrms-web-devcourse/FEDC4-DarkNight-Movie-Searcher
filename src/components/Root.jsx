@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 export default function Root() {
+  // const [movies, setMovies] = useState([])
+  const [inputValue, setInputValue] = useState('');
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <div>
       <form
@@ -9,7 +15,7 @@ export default function Root() {
           e.preventDefault();
         }}
       >
-        <input type="text" />
+        <input type="text" value={inputValue} onChange={handleChange} />
         <button>버튼</button>
       </form>
       <Outlet
