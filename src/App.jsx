@@ -1,14 +1,11 @@
 import React from 'react';
-import { Global } from '@emotion/react';
 import './App.css';
-import { globalStyles } from './assets/globalStyles';
+import { RouterProvider } from 'react-router-dom';
+import { movieRouter } from './routes/movieRouter';
 
+const router = movieRouter;
 function App() {
-  return (
-    <div className="App">
-      <Global styles={globalStyles} />
-    </div>
-  );
+  return <RouterProvider router={ router }/>
 }
 
 export default App;
