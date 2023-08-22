@@ -9,7 +9,17 @@ export default function Root() {
         <button>버튼</button>
       </form>
 
-      <Outlet />
+      {/* movies */}
+      {/* 여기서 click하면 나오는 id값을 
+      밑에 1대신 넣으면 됨.
+      */}
+      <Outlet 
+      context = {
+        {
+          movieID : 1
+        }
+      }
+      />
     </div>
   )
 }
