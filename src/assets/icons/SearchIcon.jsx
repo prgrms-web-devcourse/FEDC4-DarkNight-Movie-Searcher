@@ -1,10 +1,11 @@
 import React from 'react';
 import PropType from 'prop-types';
 
-const SearchIcon = ({ height = '100%', color = 'black' }) => (
+const SearchIcon = ({ size = '100%', color = 'black' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    height={height}
+    height={size}
+    width={size}
     fill={color}
     viewBox="0 0 512 512"
   >
@@ -13,7 +14,7 @@ const SearchIcon = ({ height = '100%', color = 'black' }) => (
 );
 
 SearchIcon.propTypes = {
-  height: PropType.string,
+  size: PropType.string,
   color: PropType.string,
 };
 
