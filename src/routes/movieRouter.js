@@ -11,7 +11,7 @@ export const movieRouter = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: '/',
+        index: true,
         element: <Movies />,
       },
       {

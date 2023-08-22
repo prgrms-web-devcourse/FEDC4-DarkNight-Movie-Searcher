@@ -5,6 +5,7 @@ export default function MovieDetail() {
   const { movieID } = useParams();
   const [selectedMovie, setSelectedMove] = useState(null);
 
+  // context로
   useEffect(() => {
     fetch(`https://omdbapi.com?apikey=7035c60c&i=${movieID}`)
       .then((res) => res.json())
