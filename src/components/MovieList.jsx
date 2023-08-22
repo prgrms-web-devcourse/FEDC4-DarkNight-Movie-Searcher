@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropsTypes from 'prop-types';
+import MovieListItem from './MovieListItem';
 
 const PAGE_NUMBER = 1;
 
@@ -21,7 +22,17 @@ export default function MovieList({ title }) {
     fetchMovieList();
   }, [title]);
 
-  return <div>{JSON.stringify(movieList)}</div>;
+  return (
+    <div>
+      {movieList ? (
+        movieList.map((movieListItem) => (
+          <MovieListItem key={movieListItem.imdbID} movie={movieListItem} />
+        ))
+      ) : (
+        <p>No movies found</p>
+      )}
+    </div>
+  );
 }
 MovieList.propTypes = {
   title: PropsTypes.string,
