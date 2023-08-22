@@ -6,13 +6,14 @@ import useForm from '../../hooks/useForm';
 import SearchIcon from '../../assets/icons/SearchIcon';
 
 const SearchBarForm = styled.form`
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 20px;
+  padding: 5px 20px;
   font-size: 26px;
   color: #ffd26b;
-  border-radius: 23px;
+  border-radius: 30px;
   background-color: #222;
 
   &:focus-within {
@@ -22,10 +23,20 @@ const SearchBarForm = styled.form`
 `;
 
 const SearchBarButton = styled.button`
-  all: unset;
+  position: absolute;
+  right: 5px;
+  outline: none;
+  border: none;
+
   display: block;
-  height: 100%;
-  width: 28px;
+  height: 46px;
+  width: 46px;
+  background-color: #888;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: #aaaaaa;
+  }
 `;
 
 const SearchBar = ({ onSubmit }) => {
@@ -46,10 +57,11 @@ const SearchBar = ({ onSubmit }) => {
         placeholder="Please enter the movie name in English"
         onChange={handleChange}
         disabled={isLoading}
+        css={{ marginRight: 32 }}
       />
       {errors.title && <p>{errors.title}</p>}
       <SearchBarButton type="submit">
-        <SearchIcon color="#888" />
+        <SearchIcon size={'23px'} color="#333" />
       </SearchBarButton>
     </SearchBarForm>
   );
