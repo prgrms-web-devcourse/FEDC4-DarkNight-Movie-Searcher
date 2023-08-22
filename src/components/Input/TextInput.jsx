@@ -6,7 +6,7 @@ const TextInputStyle = styled.input`
   padding: 8px 10px;
   width: 100%;
   height: auto;
-  font-size: 18px;
+  font-size: inherit;
   color: inherit;
   border: none;
   background: none;
