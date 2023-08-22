@@ -13,6 +13,7 @@ export default function Root() {
       </header>
       {/* 고정 */}
       <Outlet />
+      <h1>가장 최상위 root 컴포넌트</h1>
     </div>
   )
 }
