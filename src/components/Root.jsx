@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 export default function Root() {
@@ -8,6 +8,13 @@ export default function Root() {
     setInputValue(e.target.value);
   };
 
+  useEffect(() => {
+    fetch(`https://omdbapi.com?apikey=7035c60c&s=${inputValue}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, inputValue);
   return (
     <div>
       <form
