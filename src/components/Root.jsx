@@ -4,7 +4,11 @@ import { Outlet } from 'react-router-dom';
 export default function Root() {
   return (
     <div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <input type="text" />
         <button>버튼</button>
       </form>
