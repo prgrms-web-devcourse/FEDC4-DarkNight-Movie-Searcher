@@ -1,8 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
+import App from '../App';
+import Error from '../components/Error';
 
 export const movieRouter = createBrowserRouter([
   {
     path: '/',
-    element: <h1>홈페이지!</h1>,
+    element: <App />,
+    errorElement: <Error />,
   },
 ]);
