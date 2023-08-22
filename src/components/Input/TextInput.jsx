@@ -18,6 +18,8 @@ const TextInputStyle = styled.input`
   }
 `;
 
-const TextInput = (props) => <TextInputStyle type="text" {...props} />;
+const TextInput = (props) => (
+  <TextInputStyle type="text" autoComplete="off" {...props} />
+);
 
 export default TextInput;
