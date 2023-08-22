@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Global styles={globalStyles} />
-      <MovieList />
+      <MovieList title="cat" />
     </div>
   );
 }
