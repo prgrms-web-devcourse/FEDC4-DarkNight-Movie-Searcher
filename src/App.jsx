@@ -1,7 +1,7 @@
 import React from 'react';
 import { Global } from '@emotion/react';
 import './App.css';
-import { globalStyles } from './assets/common';
+import { globalStyles } from './assets/globalStyles';
 
 function App() {
   return (

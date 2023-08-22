@@ -13,8 +13,3 @@ export const globalStyles = css`
     outline: none;
   }
 `;
-
-export const palette = {
-  themeColor: '#ffd26b',
-  backgroundColor: '#222222',
-};
