@@ -2,13 +2,13 @@ import React from 'react';
 import { Global } from '@emotion/react';
 import './App.css';
 import { globalStyles } from './assets/globalStyles';
-import MovieList from './components/MovieList';
+import MovieView from './pages/MovieView';
 
 function App() {
   return (
     <div className="App">
       <Global styles={globalStyles} />
-      <MovieList title="cat" />
+      <MovieView title="harry potter" />
     </div>
   );
 }
