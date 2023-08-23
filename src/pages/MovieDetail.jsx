@@ -21,6 +21,7 @@ const BackgroundPoster = styled.div`
 const MovieDetail = () => {
   const movieDetail = useContext(movieContext);
   const [positionY, setPositionY] = useState(0);
+  const [movie, setMovie] = useState({});
 
   const NOT_AVILABLE_POSTER =
     'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX900.jpg';
@@ -28,6 +29,9 @@ const MovieDetail = () => {
   const onScroll = () => {
     setPositionY(window.scrollY);
   };
+  useEffect(() => {
+    setMovie(movieDetail);
+  }, [movieDetail]);
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
@@ -45,10 +49,10 @@ const MovieDetail = () => {
   return (
     <Page>
       <BackgroundPoster
-        poster={movieDetail.Poster && checkedPoster}
+        poster={movie.Poster && checkedPoster}
         style={{ backgroundPositionY: positionY * -1 }}
       />
-      <MovieInformation />
+      <MovieInformation movie={movie} />
     </Page>
   );
 };
