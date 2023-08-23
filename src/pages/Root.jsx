@@ -1,5 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom'; //  useNavigate괄호안 import에 추가하시면 됩니다.
+import { globalStyles } from './assets/globalStyles';
+import MovieProvider from './contexts/MovieProvider';
+import { Global } from '@emotion/react';
 
 export default function Root() {
   // 🔴 movie List 🔴
@@ -26,10 +29,12 @@ export default function Root() {
   // }, [inputValue]); => 의존성 배열안에는 input값
   return (
     // props로 안 넘겨도됨!!
-    <>
-      <Outlet />
-      {/* context={clickID}이 파라미터로
-       */}
-    </>
+    <MovieProvider>
+      <div className="App">
+        {/* 여기에 form 컴포넌트 */}
+        <Global styles={globalStyles} />
+        <Outlet />
+      </div>
+    </MovieProvider>
   );
 }
