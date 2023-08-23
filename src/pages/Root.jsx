@@ -28,13 +28,10 @@ export default function Root() {
   // request();
   // }, [inputValue]); => 의존성 배열안에는 input값
   return (
-    // props로 안 넘겨도됨!!
     <MovieProvider>
-      <div className="App">
-        {/* 여기에 form 컴포넌트 */}
-        <Global styles={globalStyles} />
-        <Outlet />
-      </div>
+      {/* 여기에 form 컴포넌트 */}
+      <Global styles={globalStyles} />
+      <Outlet />
     </MovieProvider>
   );
 }
