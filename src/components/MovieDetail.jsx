@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext } from 'react'; // useState삭제함!
+import { InputContext } from '../context/InputContext';
+// import { useParams } from 'react-router-dom';
 
 export default function MovieDetail() {
-  const { movieID } = useParams();
-  const [selectedMovie, setSelectedMove] = useState(null);
+  // const { movieID } = useParams();
+  // const [selectedMovie, setSelectedMove] = useState(null);
+  const { movieData } = useContext(InputContext);
 
-  // context로
-  useEffect(() => {
-    fetch(`https://omdbapi.com?apikey=7035c60c&i=${movieID}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setSelectedMove(data);
-      });
-  }, []);
+  console.log('선택된 movie data >> ', movieData);
+  // // context로
+  // useEffect(() => {
+  //   fetch(`https://omdbapi.com?apikey=7035c60c&i=${movieID}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setSelectedMove(data);
+  //     });
+  // }, []);
   return (
     <div>
-      <h2>선택한 영화 번호 - {movieID}</h2>
+      {/* <h2>선택한 영화 번호 - {movieID}</h2>
       {selectedMovie &&
         selectedMovie.map(({ Title, Year, imdbID, Poster }) => (
           <li key={imdbID}>
@@ -24,7 +27,7 @@ export default function MovieDetail() {
             <h2>{Title}</h2>
             <p>{Year}</p>
           </li>
-        ))}
+        ))} */}
     </div>
   );
 }
