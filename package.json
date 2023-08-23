@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^11.11.0",
+    "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^5.17.0",
