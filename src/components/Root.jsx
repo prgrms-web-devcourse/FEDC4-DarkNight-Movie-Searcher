@@ -1,16 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { InputContext } from '../context/InputContext';
+import React, { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { MovieContext } from '../context/MovieContext';
 
 export default function Root() {
-  const [movies, setMovies] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [movieID, setMovieID] = useState('');
-  const [movieData, setMovieData] = useState(null);
-  const onClick = useCallback((id) => {
-    console.log('누른 id >> ', id);
-    setMovieID(id);
-  });
+  const [movies, setMovies] = useState(null); // movies는 칠 때 마다 계속 변함....! => 계속 변하는거...!
+  const [movieID, setMovieID] = useState(null); // 클릭한 영화 id
+  const navigate = useNavigate();
+  const [movieDetail, setMovieDetail] = useState(null);
+  const clickID = (movieId) => {
+    setMovieID(movieId); // 아이디 바뀔 때 마다...!
+    navigate(`/movies/${movieId}`);
+  };
+
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
@@ -19,34 +21,47 @@ export default function Root() {
     e.preventDefault();
   };
 
+  // 🔴 movie detail 🔴
   useEffect(() => {
     fetch(`https://omdbapi.com?apikey=7035c60c&i=${movieID}`)
       .then((res) => res.json())
       .then((data) => {
-        setMovieData(data);
+        setMovieDetail(data);
       });
   }, [movieID]);
+
+  // 🔴 movie List 🔴
   useEffect(() => {
-    if (inputValue.length > 2) {
-      fetch(`https://omdbapi.com?apikey=7035c60c&s=${inputValue}`)
-        .then((res) => res.json())
-        .then((data) => {
+    const request = async () => {
+      try {
+        const res = await fetch(
+          `https://omdbapi.com?apikey=7035c60c&s=${inputValue}`
+        );
+        if (res.ok) {
+          const data = await res.json();
+          if (Object.keys(data).length >= 3) {
+            navigate('/');
+          }
           setMovies(data);
-        });
-    }
+        } else {
+          throw new Error();
+        }
+      } catch (e) {
+        throw new Error(e.message);
+      }
+    };
+    request(); // 제발 호출좀하자...! 제발...!
   }, [inputValue]);
   return (
-    // inputValue를 전달해주고 계속 여기서 변화시켜...!
-    <InputContext.Provider value={{ movies, movieID, movieData }}>
-      <div>
+    // props로 안 넘겨도됨!!
+    <MovieContext.Provider value={{ movies, movieDetail }}>
+      <>
         <form onSubmit={handleSubmit}>
           <input type="text" value={inputValue} onChange={handleChange} />
-          <button>버튼</button>
+          <button>클릭!</button>
         </form>
-        <Outlet context={onClick} />
-      </div>
-    </InputContext.Provider>
+        <Outlet context={clickID} />
+      </>
+    </MovieContext.Provider>
   );
 }
-
-//  1. 메인에다가

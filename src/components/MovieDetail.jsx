@@ -1,36 +1,48 @@
-import React, { useContext } from 'react'; // useState삭제함!
-import { InputContext } from '../context/InputContext';
-// import { useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { MovieContext } from '../context/MovieContext';
+import Loading from './Loading';
 
 export default function MovieDetail() {
-  // const { movieID } = useParams();
-  // const [selectedMovie, setSelectedMove] = useState(null);
-  const { movieData } = useContext(InputContext);
+  const { movieID } = useParams(); // url로 가든 click으로 가든 둘 다 있어!
+  const { movieDetail } = useContext(MovieContext);
+  const [detail, setDetail] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  console.log('선택된 movie data >> ', movieData);
-  // // context로
-  // useEffect(() => {
-  //   fetch(`https://omdbapi.com?apikey=7035c60c&i=${movieID}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setSelectedMove(data);
-  //     });
-  // }, []);
+  // url로 바로들어갔을 때!!!
+  // 차이점이 뭘까...!
+  useEffect(() => {
+    setLoading((prev) => !prev);
+    if (movieID) {
+      fetch(`https://omdbapi.com?apikey=7035c60c&i=${movieID}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setDetail({ ...data });
+        });
+      setLoading((prev) => !prev);
+    }
+  }, []);
   return (
     <div>
-      {/* <h2>선택한 영화 번호 - {movieID}</h2>
-      {selectedMovie &&
-        selectedMovie.map(({ Title, Year, imdbID, Poster }) => (
-          <li key={imdbID}>
-            <img src={Poster} alt="" />
-            <h2>{Title}</h2>
-            <p>{Year}</p>
-          </li>
-        ))} */}
+      {movieDetail === null || Object.keys(movieDetail).length === 2 ? (
+        <li>
+          <img src={detail.Poster} alt={`${detail.Title}사진은 없습니다`}></img>
+          <h2>{detail.Title}</h2>
+          <p>{detail.Year}</p>
+          <p>{detail.Actor}</p>
+        </li>
+      ) : (
+        <li>
+          <img
+            src={movieDetail.Poster}
+            alt={`${movieDetail.Title}사진은 없습니다`}
+          ></img>
+          <h2>{movieDetail.Title}</h2>
+          <p>{movieDetail.Year}</p>
+          <p>{movieDetail.Actor}</p>
+        </li>
+      )}
+      {loading && <Loading />}
     </div>
   );
 }
-
-// url에 movieID파라미터로 넣고 fetch요청 하시면 됩니다!!!
-// useEffect => []마운트 할 때로 놓고 요청하시면 됩니다!

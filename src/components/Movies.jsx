@@ -1,31 +1,29 @@
 import React, { useContext } from 'react';
-// import { useNavigate } from 'react-router-dom';
-import { InputContext } from '../context/InputContext';
+import { MovieContext } from '../context/MovieContext';
 import { useOutletContext } from 'react-router-dom';
 
 export default function Movies() {
-  // const navigate = useNavigate();
-  console.log('movies');
-  const { movies, movieID, movieData } = useContext(InputContext);
-  console.log(movieData, movieID);
-  // const navigation = (movieID) => {
-  //   navigate(`/movies/${movieID}`);
-  // };
-  const onClick = useOutletContext();
+  const { movies } = useContext(MovieContext);
+  const clickID = useOutletContext();
+
   return (
     <div>
-      {Array.isArray(movies) ||
-        movies.Search.map(({ imdbID, Title }) => (
-          <li
-            key={imdbID}
-            onClick={() => {
-              // navigation(imdbID);
-              onClick(imdbID);
-            }}
-          >
-            <h2>영화 {Title}</h2>
-          </li>
-        ))}
+      {
+        // null || key가 2개면 빈 배열
+        movies === null || Object.keys(movies).length === 2
+          ? []
+          : movies.Search.map(({ imdbID, Title, Year }) => (
+              <li
+                key={imdbID}
+                onClick={() => {
+                  clickID(imdbID);
+                }}
+              >
+                <h2>{Title}</h2>
+                <p>{Year}</p>
+              </li>
+            ))
+      }
     </div>
   );
 }
