@@ -18,13 +18,6 @@ const BackgroundPoster = styled.div`
   height: calc(100vh - 200px);
 `;
 
-const InformationWrapper = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  gap: 35px;
-`;
-
 const MovieDetail = () => {
   const movieDetail = useContext(movieContext);
   const [positionY, setPositionY] = useState(0);
@@ -55,9 +48,7 @@ const MovieDetail = () => {
         poster={movieDetail.Poster && checkedPoster}
         style={{ backgroundPositionY: positionY * -1 }}
       />
-      <InformationWrapper>
-        <MovieInformation />
-      </InformationWrapper>
+      <MovieInformation />
     </Page>
   );
 };

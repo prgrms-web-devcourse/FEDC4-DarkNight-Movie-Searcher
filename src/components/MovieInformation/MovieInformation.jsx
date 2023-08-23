@@ -22,6 +22,7 @@ const InformationList = styled.ul`
 const InformationItem = styled.li`
   display: flex;
   flex-direction: column;
+  gap: 35px;
   align-items: flex-start;
   font-size: 24px;
   h2 {
