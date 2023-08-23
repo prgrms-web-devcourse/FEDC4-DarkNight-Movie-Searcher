@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Error from '../components/Error';
+import Error from '../pages/Error';
 import Root from '../components/Root';
 import Movies from '../components/Movies';
 import MovieDetail from '../components/MovieDetail';
