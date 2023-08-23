@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { movieContext } from '../App';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useMovies } from '../contexts/MovieProvider';
 import styled from '@emotion/styled';
 import MovieInformation from '../components/MovieInformation/MovieInformation';
 import { palette } from '../assets/stylesConstants';
@@ -19,7 +19,7 @@ const BackgroundPoster = styled.div`
 `;
 
 const MovieDetail = () => {
-  const movieDetail = useContext(movieContext);
+  const { movieDetail } = useMovies();
   const [positionY, setPositionY] = useState(0);
   const [movie, setMovie] = useState({});
 
