@@ -11,8 +11,8 @@ export default function MovieView() {
   return (
     <div css={PageStyle}>
       <SearchBar
-        onSubmit={async ({ search }) => {
-          await setTitle(search);
+        onSubmit={({ search }) => {
+          setTitle(search);
         }}
       />
       <MovieList />
