@@ -7,16 +7,22 @@ const MovieContext = createContext();
 export const useMovies = () => useContext(MovieContext);
 
 const MovieProvider = ({ children }) => {
+  const [title, setTitle] = useState('');
   const [movies, setMovies] = useState([]);
   const [movieDetail, setMovieDetail] = useState({});
   const [totalPage, setTotalPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const searchMovies = async ({ title, page }) => {
+  const searchMovies = async ({ page }) => {
     try {
+      if (!title) {
+        setMovies([]);
+        return;
+      }
       const response = await getMovies({ title, page });
       if (response.Response === 'True') {
-        setMovies([...movies, ...response.Search]);
+        if (page === 1) setMovies([...response.Search]);
+        else setMovies([...movies, ...response.Search]);
         setTotalPage(
           Math.min(Math.ceil(Number(response.totalResults) / 10), 100)
         );
@@ -46,7 +52,10 @@ const MovieProvider = ({ children }) => {
   return (
     <MovieContext.Provider
       value={{
+        title,
+        setTitle,
         movies,
+        setMovies,
         totalPage,
         movieDetail,
         errorMessage,
