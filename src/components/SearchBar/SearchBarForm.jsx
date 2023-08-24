@@ -9,10 +9,10 @@ const SearchBarForm = styled.form`
   font-size: 26px;
   color: #ffd26b;
   border-radius: 30px;
+  border: 1px solid #333;
   background-color: #222;
 
   &:focus-within {
-    border: 1px solid #333;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   }
 `;
