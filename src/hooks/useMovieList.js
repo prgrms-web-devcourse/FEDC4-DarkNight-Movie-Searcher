@@ -1,43 +1,35 @@
-import { useState, useRef, useCallback } from 'react';
-
-export default function useMovieList(title) {
-  const [movieList, setMovieList] = useState([]);
+import { useState, useRef } from 'react';
+import { useEffect } from 'react';
+import { useMovies } from '../contexts/MovieProvider';
+export default function useMovieList() {
+  const { searchMovies, title } = useMovies();
   const [isLoading, setIsLoading] = useState(false);
 
   const pageRef = useRef(0);
 
-  const handleChange = useCallback(async (nextPage) => {
+  const setMovieList = async ({ nextPage }) => {
+    if (title === '') return;
+
     setIsLoading(true);
 
-    const data = await directFetchMovieList(title, nextPage);
+    await searchMovies({ page: nextPage });
 
-    if (data.Response === 'True') {
-      setMovieList((prev) => [...prev, ...data.Search]);
-      pageRef.current = nextPage;
-    } else {
-      console.error('API 오류:', data.Error);
-    }
+    pageRef.current = nextPage;
 
     setIsLoading(false);
-  });
+  };
+
+  const onClickButton = async () => {
+    await setMovieList({ nextPage: pageRef.current + 1 });
+  };
+
+  useEffect(() => {
+    setMovieList({ nextPage: 1 });
+  }, [title]);
 
   return {
-    movieList,
     isLoading,
     pageRef,
-    fetchMovieList: handleChange,
+    onClickButton,
   };
-}
-
-async function directFetchMovieList(title, pageNumber) {
-  try {
-    const response = await fetch(
-      `https://www.omdbapi.com/?apikey=7035c60c&s=${title}&page=${pageNumber}`
-    );
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error('movie list를 fetching 하는 단계에서 에러 발생:', error);
-  }
 }
