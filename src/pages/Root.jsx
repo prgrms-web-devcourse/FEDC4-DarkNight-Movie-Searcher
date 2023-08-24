@@ -1,10 +1,14 @@
 import React from 'react';
+import { Outlet, useNavigate } from 'react-router-dom'; //  useNavigate괄호안 import에 추가하시면 됩니다.
+import { globalStyles } from '../assets/globalStyles';
+import { useMovies } from '../contexts/MovieProvider';
 import { Global } from '@emotion/react';
-import { Outlet } from 'react-router-dom'; //  useNavigate괄호안 import에 추가하시면 됩니다.
-import { globalStyles } from '../assets/globalStyles.js';
-import MovieProvider from '../contexts/MovieProvider';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 export default function Root() {
+  const navigate = useNavigate();
+  const { setTitle } = useMovies();
+
   // 🔴 movie List 🔴
   // useEffect(() => {
   // const request = async () => {
@@ -28,10 +32,16 @@ export default function Root() {
   // request();
   // }, [inputValue]); => 의존성 배열안에는 input값
   return (
-    <MovieProvider>
+    <>
       {/* 여기에 form 컴포넌트 */}
       <Global styles={globalStyles} />
+      <SearchBar
+        onSubmit={({ search }) => {
+          navigate('/');
+          setTitle(search);
+        }}
+      />
       <Outlet />
-    </MovieProvider>
+    </>
   );
 }
