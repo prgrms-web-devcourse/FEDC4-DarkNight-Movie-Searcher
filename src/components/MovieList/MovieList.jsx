@@ -5,11 +5,16 @@ import useMovieList from '../../hooks/useMovieList';
 import { useMovies } from '../../contexts/MovieProvider';
 import { palette } from '../../assets/stylesConstants';
 import { Highlight } from '../../assets/commonstyles';
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 
 export default function MovieList() {
   const { movies } = useMovies();
-  const { isLoading, onClickLoadButton } = useMovieList();
+  const { isLoading, loadNextPageMovies } = useMovieList();
 
+  const observeRef = useInfiniteScroll({
+    handleChange: loadNextPageMovies,
+    threhold: 1,
+  });
   return (
     <Container>
       {movies.length > 0 ? (
@@ -19,12 +24,8 @@ export default function MovieList() {
               <MovieListItem key={movieListItem.imdbID} movie={movieListItem} />
             ))}
           </List>
-          <Load>
-            {isLoading ? (
-              <Highlight>Loading...</Highlight>
-            ) : (
-              <Button onClick={onClickLoadButton}>Load more</Button>
-            )}
+          <Load ref={observeRef}>
+            {isLoading && <Highlight>Loading...</Highlight>}
           </Load>
         </div>
       ) : (
@@ -50,13 +51,4 @@ const List = styled.div`
 const Load = styled.div`
   height: 100px;
   line-height: 100px;
-`;
-
-const Button = styled.button`
-  border: 1px solid ${palette.themeColor};
-  background-color: ${palette.backgroundColor};
-  color: ${palette.themeColor};
-  font-weight: bold;
-  width: 60%;
-  padding: 12px;
 `;

@@ -18,7 +18,7 @@ export default function useMovieList() {
     setIsLoading(false);
   };
 
-  const onClickLoadButton = async () => {
+  const loadNextPageMovies = async () => {
     await setMovieList({ nextPage: pageRef.current + 1 });
   };
 
@@ -29,6 +29,6 @@ export default function useMovieList() {
   return {
     isLoading,
     pageRef,
-    onClickLoadButton,
+    loadNextPageMovies,
   };
 }
