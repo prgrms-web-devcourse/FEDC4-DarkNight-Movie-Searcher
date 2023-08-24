@@ -16,11 +16,19 @@ const MovieListItem = (props) => {
 
   const Item = styled.div`
     width: 18%;
+    @media (max-width: 1280px) {
+      width: 30%;
+    }
+    @media (max-width: 720px) {
+      width: 48%;
+    }
   `;
 
   const Image = styled.img`
     object-fit: cover;
     transition: transform 0.2s;
+    width: 100%;
+    height: 100%;
     &:hover {
       transform: scale(1.1);
     }
@@ -30,6 +38,7 @@ const MovieListItem = (props) => {
     height: 400px;
     width: 100%;
     overflow: hidden;
+    text-align: center;
   `;
 
   return (
