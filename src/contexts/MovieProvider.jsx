@@ -15,6 +15,10 @@ const MovieProvider = ({ children }) => {
 
   const searchMovies = async ({ page }) => {
     try {
+      if (!title) {
+        setMovies([]);
+        return;
+      }
       const response = await getMovies({ title, page });
       if (response.Response === 'True') {
         if (page === 1) setMovies([...response.Search]);
@@ -49,6 +53,7 @@ const MovieProvider = ({ children }) => {
         title,
         setTitle,
         movies,
+        setMovies,
         totalPage,
         movieDetail,
         errorMessage,

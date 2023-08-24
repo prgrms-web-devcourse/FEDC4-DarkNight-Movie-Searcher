@@ -8,8 +8,6 @@ export default function useMovieList() {
   const pageRef = useRef(0);
 
   const setMovieList = async ({ nextPage }) => {
-    if (title === '') return;
-
     setIsLoading(true);
 
     await searchMovies({ page: nextPage });
