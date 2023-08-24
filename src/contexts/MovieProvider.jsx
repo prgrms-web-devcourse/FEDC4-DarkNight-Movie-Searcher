@@ -29,9 +29,11 @@ const MovieProvider = ({ children }) => {
   };
 
   const getMovieDetail = async (id) => {
+    console.log('받은 id >> ', id);
     try {
       const response = await getMovie(id);
       if (response.Response === 'True') {
+        console.log(response);
         setMovieDetail(response);
       } else {
         setErrorMessage(response.Error);

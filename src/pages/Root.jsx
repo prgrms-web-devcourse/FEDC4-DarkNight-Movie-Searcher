@@ -1,8 +1,8 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom'; //  useNavigate괄호안 import에 추가하시면 됩니다.
-import { globalStyles } from './assets/globalStyles';
-import MovieProvider from './contexts/MovieProvider';
 import { Global } from '@emotion/react';
+import { Outlet } from 'react-router-dom'; //  useNavigate괄호안 import에 추가하시면 됩니다.
+import { globalStyles } from '../assets/globalStyles.js';
+import MovieProvider from '../contexts/MovieProvider';
 
 export default function Root() {
   // 🔴 movie List 🔴

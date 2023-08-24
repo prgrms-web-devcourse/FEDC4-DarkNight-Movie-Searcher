@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Error from '../pages/Error';
-import Root from '../components/Root';
-import Movies from '../components/Movies';
-import MovieDetail from '../components/MovieDetail';
+import Root from '../pages/Root.jsx';
+// import Movies from '../pages/Movies.jsx';
+import MovieDetail from '../pages/MovieDetail';
 
 export const movieRouter = createBrowserRouter([
   {
@@ -10,10 +10,10 @@ export const movieRouter = createBrowserRouter([
     element: <Root />,
     errorElement: <Error />,
     children: [
-      {
-        index: true,
-        element: <Movies />,
-      },
+      // {
+      //   index: true,
+      //   element: <Movies />,
+      // },
       {
         path: '/movies/:movieID',
         element: <MovieDetail />,
