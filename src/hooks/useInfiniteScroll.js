@@ -3,11 +3,14 @@ import { useCallback, useEffect, useRef } from 'react';
 export default function useInfiniteScroll({ handleChange, threshold }) {
   const observeRef = useRef(null);
 
-  const handleIntersect = useCallback(([entry]) => {
-    if (entry.isIntersecting) {
-      handleChange();
-    }
-  });
+  const handleIntersect = useCallback(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        handleChange();
+      }
+    },
+    [handleChange]
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleIntersect, {

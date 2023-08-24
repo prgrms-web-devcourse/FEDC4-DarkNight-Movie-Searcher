@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
 import { useMovies } from '../contexts/MovieProvider';
+
 export default function useMovieList() {
   const { searchMovies, title } = useMovies();
   const [isLoading, setIsLoading] = useState(false);
