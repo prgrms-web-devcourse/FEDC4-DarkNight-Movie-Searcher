@@ -17,7 +17,7 @@ const LoadStyle = css`
 
 export default function MovieList() {
   const { movies } = useMovies();
-  const { isLoading, onClickButton } = useMovieList();
+  const { isLoading, onClickLoadButton } = useMovieList();
 
   return (
     <div>
@@ -36,7 +36,7 @@ export default function MovieList() {
               {isLoading ? (
                 <p>Loading...</p>
               ) : (
-                <button onClick={onClickButton}>Load more</button>
+                <button onClick={onClickLoadButton}>Load more</button>
               )}
             </div>
           </div>
