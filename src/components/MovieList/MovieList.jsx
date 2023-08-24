@@ -9,7 +9,6 @@ import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 
 export default function MovieList() {
   const { movies } = useMovies();
-  console.log(movies);
   const { isLoading, loadNextPageMovies } = useMovieList();
 
   const observeRef = useInfiniteScroll({

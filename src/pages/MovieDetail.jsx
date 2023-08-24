@@ -44,9 +44,7 @@ const MovieDetail = () => {
   }, []);
 
   useEffect(() => {
-    // api를 받음!
     getMovieDetail(movieID);
-    console.log(movieDetail);
   }, []);
   const checkedPoster = useMemo(() => {
     if (!movieDetail.Poster) return '';
