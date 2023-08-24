@@ -17,7 +17,8 @@ const MovieProvider = ({ children }) => {
     try {
       const response = await getMovies({ title, page });
       if (response.Response === 'True') {
-        setMovies([...movies, ...response.Search]);
+        if (page === 1) setMovies([...response.Search]);
+        else setMovies([...movies, ...response.Search]);
         setTotalPage(
           Math.min(Math.ceil(Number(response.totalResults) / 10), 100)
         );
