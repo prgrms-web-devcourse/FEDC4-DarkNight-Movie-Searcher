@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useMovies } from '../contexts/MovieProvider';
 
 export default function useMovieList() {
-  const { searchMovies, title } = useMovies();
+  const { searchMovies, title, totalPage } = useMovies();
   const [isLoading, setIsLoading] = useState(false);
 
   const pageRef = useRef(0);
@@ -19,13 +19,14 @@ export default function useMovieList() {
   };
 
   const loadNextPageMovies = async () => {
-    await setMovieList({ nextPage: pageRef.current + 1 });
+    if (totalPage >= pageRef.current) {
+      await setMovieList({ nextPage: pageRef.current + 1 });
+    }
   };
 
   useEffect(() => {
     setMovieList({ nextPage: 1 });
   }, [title]);
-
   return {
     isLoading,
     pageRef,
