@@ -14,4 +14,5 @@ export default function MovieView() {
 const PageStyle = css`
   background-color: ${palette.backgroundColor};
   min-height: 100vh;
+  text-align: center;
 `;

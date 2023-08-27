@@ -4,13 +4,15 @@ import { globalStyles } from '../assets/globalStyles';
 import { useMovies } from '../contexts/MovieProvider';
 import { Global } from '@emotion/react';
 import SearchBar from '../components/SearchBar/SearchBar';
+import { css } from '@emotion/react';
+import { palette } from '../assets/stylesConstants';
 
 export default function Root() {
   const navigate = useNavigate();
   const { setTitle } = useMovies();
 
   return (
-    <>
+    <div css={Container}>
       <Global styles={globalStyles} />
       <SearchBar
         onSubmit={({ search }) => {
@@ -19,6 +21,10 @@ export default function Root() {
         }}
       />
       <Outlet />
-    </>
+    </div>
   );
 }
+
+const Container = css`
+  background-color: ${palette.backgroundColor};
+`;
