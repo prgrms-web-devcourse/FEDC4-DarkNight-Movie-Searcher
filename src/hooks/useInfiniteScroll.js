@@ -16,10 +16,17 @@ export default function useInfiniteScroll({ handleChange, threshold }) {
     const observer = new IntersectionObserver(handleIntersect, {
       threshold: threshold,
     });
-    observer.observe(observeRef.current);
 
-    return () => observer.disconnect();
-  }, [observeRef]);
+    if (observeRef.current) {
+      observer.observe(observeRef.current);
+    }
+
+    return () => {
+      if (observeRef.current) {
+        observer.unobserve(observeRef.current);
+      }
+    };
+  }, [handleIntersect, threshold]);
 
   return observeRef;
 }

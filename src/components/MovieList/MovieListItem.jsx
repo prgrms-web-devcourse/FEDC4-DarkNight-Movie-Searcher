@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { useMovies } from '../../contexts/MovieProvider';
 import { Highlight, Text } from '../../assets/commonstyles';
+import { useNavigate } from 'react-router-dom';
 
 export default function MovieListItem(props) {
   const { Title, Year, imdbID, Type, Poster } = props.movie;
 
   const { getMovieDetail } = useMovies();
+  const navigate = useNavigate();
 
   async function onClickMovieListItem(id) {
     await getMovieDetail(id);
+    navigate(`/movies/${id}`);
   }
 
   return (

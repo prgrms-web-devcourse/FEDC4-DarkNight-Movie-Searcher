@@ -3,6 +3,7 @@ import { useMovies } from '../contexts/MovieProvider';
 import styled from '@emotion/styled';
 import MovieInformation from '../components/MovieInformation/MovieInformation';
 import { palette } from '../assets/stylesConstants';
+import { useParams } from 'react-router-dom';
 
 const Page = styled.div`
   margin: 0 auto;
@@ -19,10 +20,12 @@ const BackgroundPoster = styled.div`
 `;
 
 const MovieDetail = () => {
-  const { movieDetail } = useMovies();
+  // 여기서도 바로 접속할 때를 대비해서, url호출을 해줘야 함.
+  const { movieID } = useParams(); // 바로 url로 접속했을 때!
+  console.log('받은 movieID >> ', movieID);
+  const { movieDetail, getMovieDetail } = useMovies();
   const [positionY, setPositionY] = useState(0);
   const [movie, setMovie] = useState({});
-
   const NOT_AVILABLE_POSTER =
     'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX900.jpg';
 
@@ -40,6 +43,9 @@ const MovieDetail = () => {
     };
   }, []);
 
+  useEffect(() => {
+    getMovieDetail(movieID);
+  }, []);
   const checkedPoster = useMemo(() => {
     if (!movieDetail.Poster) return '';
     if (movieDetail.poster === 'N/A') return NOT_AVILABLE_POSTER;
